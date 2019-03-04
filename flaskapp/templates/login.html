@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+
+      <script type="text/javascript" src="vendor/jquery/jquery.min.js"></script>
+      <script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+      <script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
+      <script src="static/js/index.js"></script>
+      <style>
+      .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: #121a39;
+        color: white;
+        text-align: center;
+      }
+      </style>
+
+</head>
+
+
+<body style="background-image:linear-gradient(-90deg,#42105f,#1e4354);">
+<nav class="navbar navbar-inverse " style="background:#121a39">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#" style="color: white">Drent</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/">Home</a></li>
+            <li><a href="../navbar-static-top/">About</a></li>
+            <li><a href="../navbar-static-top/">Services</a></li>
+             <li><a href="../navbar-static-top/">Contact</a></li>
+            <li class="active"><a href="./">login <span class="sr-only">(current)</span></a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav><br><br><br>
+       <div class="container">
+            <div class="row">
+                <div class="col-xs-4 col-xs-offset-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 align="center">LOGIN</h3>
+                        </div>
+                        <div class="panel-body">
+                            <p class="text-warning ">login to rent a house</p>
+                            <form action="" method="post">
+                           <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                               <input type="email" required class="form-control" name="uname" placeholder="Email">
+                        </div><br>
+                            <div class="input-group">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                <input type="password" required class="form-control" name="pswd" placeholder="Password">
+                        </div><br>
+                        <div class="form-group">
+
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                            <select required name="utype" class="form-control" >
+                               <option  value="">Select Your Choice</option>
+                              <option value="Landlord">Landlord</option>
+                              <option value="Tenant">Tenant</option>
+                            </select>
+                          </div>
+
+                        </div>
+                            <br>
+                            <button type="submit" class="btn btn-primary">Submit</button><br>
+                            <!--<a href="registration.html"><button type="link" class="btn btn-default ">Signup</button></a>-->
+                        </div>
+
+                        <div class="panel-footer">
+                            <p >Don't have an account? <a href="/register">Register</a></p>
+                        </div>
+                      </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+      <!-- Footer -->
+    <footer class="bg-dark sticky-bottom">
+      <div class="container footer">
+        <br>
+        <p class="m-0 text-center text-white">Copyright &copy; <code>Drent</code> 2018</p>
+
+      </div>
+      <!-- /.container -->
+    </footer>
+</body>
+</html>

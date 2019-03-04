@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Addproperty</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript"></script>
+
+
+
+  <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+<link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css'>
+<link rel='stylesheet prefetch' href='http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/css/bootstrapValidator.min.css'>
+<script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
+<script src="static/js/index1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+
+      <link rel="stylesheet" href="css/style.css">
+      <style>
+          .f1{
+              color: #f9f9f9;
+          }
+          .footer{
+            background-color: #121a39;
+            height: 50px;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+          }
+      </style>
+
+</head>
+
+<body style="background-image:linear-gradient(-90deg,#42105f,#1e4354);">
+  <nav class="navbar navbar-inverse " style="background:#121a39">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#" style="color: white">Drent</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/">Home</a></li>
+              <li><a href="../navbar-static-top/">About</a></li>
+              <li><a href="../navbar-static-top/">Services</a></li>
+               <li><a href="../navbar-static-top/">Contact</a></li>
+               <li><a href="logout"><span class="glyphicon glyphicon-log-out"> logout</a></li>
+              </span></a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </nav>
+
+      <div class="container">
+
+    <form class="form-horizontal f1" onsubmit="addProperty()"   id="appoint_form" >
+<fieldset>
+
+<!-- Form Name -->
+<center><h2><b>Add Property</b></h2></center><br>
+<div class="form-group">
+  <label class="col-md-4 control-label">Property Name</label>
+  <div class="col-md-4 inputGroupContainer">
+  <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+  <input  name="pname" id="pname" placeholder="Title" class="form-control"  type="text" required/>
+    </div>
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-md-4 control-label">Property Desciption</label>
+  <div class="col-md-4 inputGroupContainer">
+  <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+  <input  name="description" id="description" placeholder="Describe your property" class="form-control"  type="text" required/>
+    </div>
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-md-4 control-label">Security Deposit</label>
+  <div class="col-md-4 inputGroupContainer">
+  <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+  <input  name="sd" id="securitydeposit" placeholder="Security Deposit" class="form-control"  type="text" required/>
+    </div>
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-md-4 control-label">Payment Type</label>
+    <div class="col-md-4 selectContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+    <select name="ptype" id="ptype" class="form-control selectpicker">
+       <option value="select">Payment Type</option>
+      <option value="Prepaid">Prepaid</option>
+      <option value="Postpaid">Postpaid</option>
+    </select>
+  </div>
+</div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-4 control-label">NoticePeriod</label>
+  <div class="col-md-4 inputGroupContainer">
+  <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+  <input  name="noticeperioddays" id="noticeperioddays" placeholder="NoticePeriod(days)" class="form-control"  type="text" required/>
+    </div>
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-4 control-label">City</label>
+    <div class="col-md-4 selectContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+    <select name="lcity" id="lcity" class="form-control selectpicker">
+       <option value="select">Select Your Choice</option>
+      	<option value="Ahmedabad">Ahmedabad</option>
+      	<option value="Bengaluru">Bengaluru</option>
+	<option value="Chennai">Chennai</option>
+	<option value="Delhi">Delhi</option>
+	<option value="Faridabad">Faridabad</option>
+	<option value="Gangtok">Gangtok</option>
+	<option value="Hyderabad">Hyderabad</option>
+	<option value="Itanagar">Itanagar</option>
+	<option value="Jaipur">Jaipur</option>
+	<option value="Kolkata">Kolkata</option>
+      	<option value="Lucknow">Lucknow</option>
+	<option value="Mumbai">Mumbai</option>
+	<option value="Nahsik">Nahsik</option>
+	<option value="Patna">Patna</option>
+	<option value="Raipur">Raipur</option>
+	<option value="Surat">Surat</option>
+	<option value="Tirupati">Tirupati</option>
+	<option value="Vishakhapatnam">Vishakhapatnam</option>
+    </select>
+  </div>
+</div>
+</div>
+<div class="form-group">
+  <label class="col-md-4 control-label">PropertyAddress</label>
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+  <textarea name="propertyaddress" id="propertyaddress" cols="30" rows="3" class="form-control"  required>
+</textarea>
+    </div>
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-md-4 control-label"></label>
+  <div class="col-md-4"><br><center>
+<button type="submit"  class="btn btn-primary">Submit</button>
+</center>
+  </div>
+</div>
+</div>
+<footer class="footer">
+      <div class="container">
+      <br>
+        <p class="text-muted" align="center" style="color: white">Copyright &copy; <code>Drent</code> 2019</p>
+      </div>
+    </footer>
+    <script type="text/javascript">
+    function addProperty() {
+      var j_pname = $('#pname').val();
+      var description = $('#description').val();
+      var securityDeposit = $('#securitydeposit').val();
+      var paymentType = $('#ptype').val();
+      var noticePeriodDays = $('#noticeperioddays').val();
+      var lCity = $('#lcity').val();
+      var propertyAddress = $('#propertyaddress').val();
+
+    console.log(propertyAddress);
+
+    Landlord.addProperty(j_pname, description, securityDeposit, paymentType, noticePeriodDays, lCity, propertyAddress,function(err, res) {
+      if(res){
+          alert("Property added, transaction id: "+res);
+      }
+       console.log(res);
+      // console.log(res.c[0]);
+
+
+    });
+    }
+
+
+
+    const element = document.querySelector('form');
+element.addEventListener('submit', event => {
+  event.preventDefault();
+  // actual logic, e.g. validate the form
+  console.log('Form submission cancelled.');
+});
+    </script>
+</body>
+</html>
