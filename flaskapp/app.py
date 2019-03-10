@@ -4,9 +4,14 @@ import requests
 import yaml
 import sys
 import hashlib
+import os
 from moneywagon import generate_keypair
+from werkzeug.utils import secure_filename
 
+UPLOAD_FOLDER = os.path.basename('uploads')
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.secret_key = 'dont tell any one'
 
 db = yaml.load(open('db.yaml'))
@@ -16,6 +21,10 @@ app.config['MYSQL_PASSWORD'] = db['mysql_password']
 app.config['MYSQL_DB'] = db['mysql_db']
 
 mysql = MySQL(app)
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/')
 def index():
@@ -61,26 +70,45 @@ def addproperty():
         else:
             return redirect('login')
     elif request.method == 'POST':
-        return ''
+        details = request.form
+        name = details['pname']
+        description = details['description']
+        lCity = details['lcity']
+        eth_address = details['eth_address']
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT * FROM properties WHERE eth_address='"+eth_address+"'")
+        num = str(cur.rowcount)
+        pid = num
+        if 'file' in request.files:
+            file = request.files['file']
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        img_name = filename
+        cur.execute("INSERT INTO properties(pid,eth_address,title,description,location,img_name) VALUES(%s, %s,%s,%s,%s,%s)", (pid, eth_address,name,description,lCity,img_name))
+        mysql.connection.commit()
+        cur.close()
+        flash("Property listed, Thank you..!!!")
+        return render_template('success.html')
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        ret = requests.post('https://api.blockcypher.com/v1/eth/main/addrs?token=5d4921e36bb74890bbb2507e96f402d1')
-        data = ret.json();
         userDetails = request.form
+        name = userDetails['name'];
         uname = userDetails['uname']
         h = hashlib.md5(userDetails['pswd'].encode())
         password = h.hexdigest()
         mobile = userDetails['phn']
         address = userDetails['addr']
         type = userDetails['purp']
+        ethaddress = userDetails['ethaddress']
         cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO usertable1(username, password, mobileno, address, usertype) VALUES(%s, %s, %s, %s, %s)", (uname, password, mobile, address, type))
+        cur.execute("INSERT INTO usertable1(name, username, password, mobileno, address, usertype, eth_address) VALUES(%s, %s, %s, %s, %s, %s, %s)", (name, uname, password, mobile, address, type, ethaddress))
         mysql.connection.commit()
         cur.close()
-        flash("Register successfull please save following details:")
-        return render_template('success.html', data = data)
+        flash("Register successfull !! login to continue..")
+        return render_template('success.html')
     elif request.method == 'GET':
         return render_template('register.html')
 
@@ -91,7 +119,12 @@ def success():
 @app.route('/tenantDashboard')
 def tenantDashboard():
     if session.get('usertype') == 'Tenant':
-        return render_template('tenantDashboard.html')
+        cur = mysql.connection.cursor()
+        query = "select * from properties";
+        cur.execute(query)
+        records = cur.fetchall()
+        num = cur.rowcount
+        return render_template('tenantDashboard.html', data = records, len = num)
     else:
         return redirect('login')
 
@@ -109,6 +142,13 @@ def propertydetails():
     else:
         return redirect('login')
 
+@app.route('/showproperty')
+def showproperty():
+    if session.get('usertype') == 'Tenant' or session.get('usertype') == 'Landlord':
+        return render_template('showproperties.html')
+    else:
+        return redirect('login')
+
 @app.route('/logout')
 def logout():
    # remove the username from the session if it is there
@@ -116,7 +156,12 @@ def logout():
    session.pop('usertype', None)
    return redirect('/')
 
-
+@app.route('/agreements')
+def agreements():
+    if session.get('usertype') == 'Tenant' or session.get('usertype') == 'Landlord':
+        return render_template('showproperties.html')
+    else:
+        return redirect('login');
 
 if __name__ =='__main__':
     app.run(debug=True)

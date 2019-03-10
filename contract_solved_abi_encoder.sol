@@ -12,7 +12,7 @@ pragma solidity ^0.5.0;
             bool noticePeriod; // by default false
             uint256 noticePeriodDays;
             address landlordAddress;
-            uint noticeTimeStamp;
+            uint noticeTimeStamp; 
             string propertyAddresss; //physical address
             string status; // occupied/open
 
@@ -36,7 +36,7 @@ pragma solidity ^0.5.0;
 
         }
 
-
+        
         function getPaymentDetails(address _tAddress) public view returns(string memory ){
             return (agrement[_tAddress].paymentType);
         }
@@ -77,7 +77,7 @@ pragma solidity ^0.5.0;
                 return false;
             }
         }
-
+        
         //-------------------------------------------------------------------------------- GET AGREEMENT DETAILS --------------------------------------------------------------------------------
         function GAD_pname(address _tAddress) public view returns(string memory){
             return agrement[_tAddress].pname;
@@ -108,7 +108,7 @@ pragma solidity ^0.5.0;
         }
 
     }
-
+    
 
 //=============================================================================================================================================
 //      landlord contract
@@ -147,7 +147,7 @@ pragma solidity ^0.5.0;
             pDetails[msg.sender].push(tmp);
             mpid= mpid+1;
          }
-
+     
         function getPropertyCount(address _ad) public view returns(uint256)
         {
             return pDetails[_ad].length;
@@ -178,7 +178,7 @@ pragma solidity ^0.5.0;
         function GPD_paymentType(address _ad, uint256 _id) public view returns(string memory){
          return pDetails[_ad][_id].paymentType;
         }
-
+      
         function GPD_noticePeriod(address _ad, uint256 _id) public view returns(bool){
          return pDetails[_ad][_id].noticePeriod;
         }
@@ -197,5 +197,5 @@ pragma solidity ^0.5.0;
          function GPD_propertyAddress(address _ad, uint256 _id) public view returns(string memory){
          return pDetails[_ad][_id].propertyAddress;
         }
-
+        
     }

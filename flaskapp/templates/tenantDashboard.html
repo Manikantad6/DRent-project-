@@ -2,13 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Login page</title>
+  <title>Dashbord</title>
 
       <script type="text/javascript" src="vendor/jquery/jquery.min.js"></script>
       <script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
       <script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
        <script src="static/js/index1.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
       <style type="text/css">
       .footer {
              position: fixed;
@@ -40,10 +46,8 @@
           <ul class="nav navbar-nav">
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="../navbar/">Home</a></li>
-            <li><a href="../navbar-static-top/">About</a></li>
-            <li><a href="../navbar-static-top/">Services</a></li>
-             <li><a href="../navbar-static-top/">Contact</a></li>
+            <li><a href="/"><span class="glyphicon glyphicon-home"> Home</a></li>
+              <li><a href="/agreements"><span class="glyphicon glyphicon-list-alt"> Agreements</a></li>
              <li><a href="logout"><span class="glyphicon glyphicon-log-out"> logout</a></li>
             </span></a></li>
           </ul>
@@ -58,72 +62,86 @@
             </div>
         </div>
 
-       <div class="container">
-        <div class="container">
-        <div class="row">
+        <div class="container" id="container">
+
+
+        <div class="row">{%for rec in data%}
             <div class="col-sm-3 myclass">
                   <div class="thumbnail">
                    <img src="img/nikon.jpg" height="180" width="185" alt="responsive image" >
-                       <div class="caption">
-                           <h3 class="center">Title</h3>
-                          <p class="center">Address </p>
-                          <button type="submit" class="btn btn-primary btn-block">View Details</button>
+                       <div class="caption" id="{{rec[1]}}">
+                          <h3 class="center" id="name">{{rec[2]}}</h3>
+                          <p class="center" id="address">{{rec[3]}}</p>
+                          <button type="submit" class="btn btn-primary btn-block" id="viewDetails" onclick="viewDetails('{{rec[1]}}')">View Details</button>
                        </div>
                   </div>
-
-            </div>
-                        <div class="col-sm-3 myclass">
-                  <div class="thumbnail">
-                      <img src="img/samsung1.jpg" alt="responsive image" height="300" width="300">
-                       <div class="caption">
-                           <h3 class="center">Samsung</h3>
-                          <p class="center">price:Rs. 30000.00 </p>
-                          <button type="submit" class="btn btn-primary btn-block">View Details</button>
-                       </div>
-                  </div>
-
-
-            </div>
-
-                        <div class="col-sm-3">
-                  <div class="thumbnail">
-                   <img src="img/canon1.jpg" height="320" width="325" alt="responsive image">
-                       <div class="caption">
-                           <h3 class="center">Canon</h3>
-                          <p class="center">price:Rs.35000.00 </p>
-                          <button type="submit" class="btn btn-primary btn-block">View Details</button>
-                       </div>
-                  </div>
-
-
-            </div>
-
-                        <div class="col-sm-3">
-                  <div class="thumbnail">
-                   <img src="img/sony.jpg" height="200" width="200" alt="responsive image" >
-                       <div class="caption">
-                           <h3 class="center">Sony</h3>
-                          <p class="center">price:Rs. 40000.00 </p>
-                          <button type="submit" class="btn btn-primary btn-block">View Details</button>
-                       </div>
-                  </div>
-
-
-            </div>
-
-
-
+            </div> {%endfor%}
+           </div>
+           <h1 id = 'test' style="color:white"></h1>
            </div>
 
-           </div>
-
-             </div>
-
-    <div class="container">
-      <button type="button" class="btn btn-primary" onclick="getPropertyCount()">Get Property count</button>
-        <button type="button" class="btn btn-primary" onclick="getPropertyDetails1()">Get Property details</button>
-    </div>
 <br><br>
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Property Details</h4>
+        </div>
+        <div class="modal-body">
+            <table align="center" class="table" align="center">
+                <tr >
+                  <td><h4>Name:</h4></td>
+                  <td><h4 id="pname"></h4></td>
+                </tr>
+                <tr>
+                  <td><h4>Description:</h4></td>
+                  <td><h4 id="description"></h4></td>
+                </tr>
+                <tr>
+                  <td><h4>City:</h4></td>
+                  <td><h4  id="lcity"></h4></td>
+                </tr>
+                <tr>
+                  <td><h4>Address:</h4></td>
+                  <td><h4 id="location"><h4></td>
+                </tr>
+                <tr>
+                  <td><h4>Landlord:</h4></td>
+                  <td><h4 id="landlord"></h4></td>
+                </tr>
+                <tr>
+                  <td><h4>Security Deposit:</h4></td>
+                  <td><h4 id="securityDeposit"><h4></td>
+                </tr>
+                <tr>
+                  <td><h4>Payment Type:</h4></td>
+                  <td><h4 id="paymentType"></h4></td>
+                </tr>
+                <tr>
+                  <td><h4>noticePeriod: (days)</h4></td>
+                  <td><h4 id="noticePeriod"></h4></td>
+                </tr>
+                <tr>
+                  <td><h4>Status:</h4></td>
+                  <td><h4  id="status"></h4></td>
+                </tr>
+
+            </table>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" onclick="makeAgreement()">Make Agreement</button>
+          <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+<div id="mani"></div>
 <footer class="footer">
       <div class="container">
       <br>
@@ -132,6 +150,93 @@
     </footer>
 
     <script type="text/javascript">
+    $(document).ready(function() {
+      var eth = web3.eth.defaultAccount;
+
+    });
+
+    function GPD_pname(eth) {
+    //  alert(eth);
+      Landlord.GPD_pname(eth,0,function(err, res) {
+      otherfunction(res, "#pname");
+    });
+    Landlord.GPD_description(eth,0,function(err, res) {
+       //console.log(res);
+       otherfunction(res, "#description");
+    });
+
+    Landlord.GPD_securityDeposit(eth,0,function(err, res) {
+       //console.log(res['c'][0]);
+       otherfunction(res['c'][0],"#securityDeposit");
+
+    });
+    Landlord.GPD_paymentType(eth,0,function(err, res) {
+       //console.log(res);
+       otherfunction(res, "#paymentType");
+    });
+
+    Landlord.GPD_landlordAddress(eth,0,function(err, res) {
+       //console.log(res);
+       otherfunction(res, "#landlord");
+    });
+    Landlord.GPD_status(eth,0,function(err, res) {
+       //console.log(res);
+       otherfunction(res, "#status");
+    });
+    Landlord.GPD_noticePeriodDays(eth,0,function(err, res) {
+    //   console.log(res);
+    otherfunction(res['c'][0], "#noticePeriod");
+    });
+
+    Landlord.GPD_lCity(eth,0,function(err, res) {
+       console.log(res);
+       otherfunction(res, "#lcity");
+    });
+    Landlord.GPD_propertyAddress(eth,0,function(err, res) {
+       console.log(res);
+       otherfunction(res, "#location");
+    });
+
+    }
+    function otherfunction(res, id){
+        $(id).html(res);
+      //alert(res);
+      return res;
+
+    }
+
+
+    function viewDetails(address_eth) {
+      alert(address_eth);
+    $("#myModal").modal();
+    GPD_pname(address_eth);
+
+    }
+
+    function makeAgreement(){
+      alert("Excited!!!");
+      var pname = $('#pname').html();
+      var description = $('#description').html();
+      var city = $('#lcity').html();
+      var location = $('#location').html();
+      var landlord = $('#landlord').html();
+      var securityDeposit = $('#securityDeposit').html();
+      var paymentType = $('#paymentType').html();
+      var noticePeriod = $('#noticePeriod').html();
+      var status = $('#status').html();
+      var address = location+", "+city;
+      if(status == "open"){
+        Tenant.signAgreement(pname,web3.eth.defaultAccount,landlord,securityDeposit,paymentType, noticePeriod, address,function(err, res) {
+           console.log(res);
+           alert("Agreement signed will be confirmed in few minutes");
+
+      });
+      Landlord.changeStatus(eth,0,"occupied",function(err, res) {
+         console.log(res);
+      });
+      }
+       $('#myModal').modal('toggle');
+    }
 
     </script>
 </body>
