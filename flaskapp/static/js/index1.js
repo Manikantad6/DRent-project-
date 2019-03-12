@@ -21,8 +21,8 @@ abi_landlord = JSON.parse('[{"constant":true,"inputs":[{"name":"_ad","type":"add
 
 var LandlordContract  = web3.eth.contract(abi_landlord);
 var TenantContract = web3.eth.contract(abi_tenant);
- Landlord = LandlordContract.at('0x3f9fe1b2c6f9dd35139ef8d40cdbffbb9ebb80f7');
- Tenant = TenantContract.at('0x5a6a8a67dcef478f045a370f84c3037f78fc2b86')
+ Landlord = LandlordContract.at('0x02abad6125aa6697b32dd1d150d3b67399d53b5d');
+ Tenant = TenantContract.at('0x42b3e6637b116227E87c34C86e29a463eBDfaDf2')
 console.log(Tenant);
 console.log(Landlord);
 
